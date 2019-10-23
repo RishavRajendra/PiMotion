@@ -10,21 +10,36 @@ class StepperMotion:
             
             [GPIO.setup(pin, GPIO.OUT) for pin in out_pins]
 
-    """
-    TODO: Move forward and back
-    Change Log
-        [0.0.0] Rishav
-            --- Created function
-        [0.1.0] Jonathan
-            --- GPIO arg has been added to allow functionality of the robots wheels. This allows us to manipulate IO pins. 
-                Wheels have corrected names based off of their position.
-        [0.2.0] Jonathan
-            --- Direction is now a boolean True or False. Since other directions will be included later on, this is temporary.
-                ValueError Exception is now thrown when direction is not set to be True or False. Delay argument has been added 
-                that defaults to STEPPER_DELAY. This allows us to change the speed via the parameter.
-    """
-    def mov(self, dir, distance, GPIO, delay=STEPPER_DELAY):
-            distance = int(distance* STEPS_PER_INCH)
+	"""
+	TODO: Move forward and back
+
+	Change Log
+		[0.0.0] Rishav
+			--- Created function
+        Change Log
+                [0.1.0] Jonathan
+                        --- GPIO arg has been added to allow functionality of
+                        the robots wheels. This allows us to manipulate IO pins.
+                        Wheels have corrected names based off of their position.
+        Change Log
+                [0.2.0] Jonathan
+                        --- Direction is now a boolean True or False. Since other
+                        directions will be included later on, this is temporary.
+                        ValueError Exception is now thrown when direction is not 
+                        set to be True or False. Delay argument has been added 
+                        that defaults to STEPPER_DELAY. This allows us to change 
+                        the speed via the parameter.
+        Change Log
+                [0.2.5] Jonathan
+                        --- New constants for STEPS_PER_REVOLUTION and 
+                        STEPS_PER_INCH have been made individually for different 
+                        robots in constants.py. Constant STEPS_PER_INCH has been 
+                        updated to QUARTER_STEPS_PER_INCH in motion.py and 
+                        QUARTER_STEPS_PER_REVOLUTION in reference.py.
+
+	"""
+	def mov(self, dir, distance, GPIO, delay=STEPPER_DELAY):
+            distance = int(distance* QUARTER_STEPS_PER_INCH)
             
             try:
                 #if FWD
@@ -55,6 +70,10 @@ class StepperMotion:
     # TODO: Turn left and right
     def turn(self, dir, degrees):
         pass
+
+	# TODO: Turn left and right
+	def turn(self, dir, degrees):
+		pass
 
     """
     For strafe right motion, FR=BL=fwd and BR=FL=rev

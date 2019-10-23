@@ -13,7 +13,7 @@ out_pins = step_mode_select + wheels_step + wheels_dir
 for pin in out_pins:
 	GPIO.setup(pin, GPIO.OUT)
 
-step_count = STEPS_PER_REVOLUTION * 5
+step_count = QUARTER_STEPS_PER_REVOLUTION * 5
 
 for pin in [BR_dir, FR_dir]:
 	GPIO.output(pin, CCW)

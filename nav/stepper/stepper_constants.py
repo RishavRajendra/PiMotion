@@ -22,20 +22,33 @@ BL_dir = 8
 FL_step = 24
 FL_dir = 23
 
-<<<<<<< HEAD
-CW = 1                           # Clockwise rotation
-CCW = 0                          # Counter-clockwise rotation
-STEPS_PER_REVOLUTION = 800       # Steps per Revolution (360/1.8) * 4. Multiply by 4 because quarter step.
-=======
-#Direction constants
+# Direction constants
 FWD = True
 REV = False
 
-CW = 1 			                 # Clockwise rotation
-CCW = 0 		                 # Counter-clockwise rotation
-STEPS_PER_REVOLUTION = 800 		 # Steps per Revolution (360/1.8) * 4. Multiply by 4 because quarter step.
->>>>>>> upstream/motion
+# Clockwise and Counter-clockwise constants 
+CW = 1 			                 
+CCW = 0
+
+# whole, 1/2, 1/4, and 1/8 steps per revolution constants.
+# steps per revolution is obtained by (360/1.8) * denominator. 
+# ie: (360/1.8) * 2 = 400 for half steps per revolution
+STEPS_PER_REVOLUTION = 200
+HALF_STEPS_PER_REVOLUTION = 400
+QUARTER_STEPS_PER_REVOLUTION = 800 		
+EIGTH_STEPS_PER_REVOLUTION = 1600
+
+CW = 1                           # Clockwise rotation
+CCW = 0                          # Counter-clockwise rotation
+STEPS_PER_REVOLUTION = 800       # Steps per Revolution (360/1.8) * 4. Multiply by 4 because quarter step.
+
 DISTANCE = 60*math.pi/25.4
+
+# individual steps per inch based off of whole step, 1/2 step, 1/4 step, and 1/8 step.
 STEPS_PER_INCH = STEPS_PER_REVOLUTION/DISTANCE
+HALF_STEPS_PER_INCH = HALF_STEPS_PER_REVOLUTION/DISTANCE
+QUARTER_STEPS_PER_INCH = QUARTER_STEPS_PER_REVOLUTION/DISTANCE
+EIGTH_STEPS_PER_INCH = EIGTH_STEPS_PER_REVOLUTION/DISTANCE
+
 STEPPER_DELAY = 0.0005
 STEPS_PER_INCH_STRAFE = STEPS_PER_REVOLUTION/(DISTANCE*0.9)  # Calibrates steps_per_inch for strafe motion.
