@@ -36,7 +36,15 @@ class StepperMotion:
                         robots in constants.py. Constant STEPS_PER_INCH has been 
                         updated to QUARTER_STEPS_PER_INCH in motion.py and 
                         QUARTER_STEPS_PER_REVOLUTION in reference.py.
-
+        Change Log
+                [0.3.0] Jonathan
+                        --- constants have for STEPS_PER_REVOLUTION have been 
+                        modified and created to be a dictionary. This will allow
+                        users to call the dictionary STEP_PER_REVOLUTION with 
+                        the mode they would like to select. ie: 
+                        STEPS_PER_REVOLUTION['whole']. dictionary has been 
+                        created for STEPS_PER_INCH and STEPS_PER_INCH_STRAFE for 
+                        same reason.
 	"""
 	def mov(self, dir, distance, GPIO, delay=STEPPER_DELAY):
             distance = int(distance* QUARTER_STEPS_PER_INCH)

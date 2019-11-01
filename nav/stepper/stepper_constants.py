@@ -33,22 +33,20 @@ CCW = 0
 # whole, 1/2, 1/4, and 1/8 steps per revolution constants.
 # steps per revolution is obtained by (360/1.8) * denominator. 
 # ie: (360/1.8) * 2 = 400 for half steps per revolution
-STEPS_PER_REVOLUTION = 200
-HALF_STEPS_PER_REVOLUTION = 400
-QUARTER_STEPS_PER_REVOLUTION = 800 		
-EIGTH_STEPS_PER_REVOLUTION = 1600
-
-CW = 1                           # Clockwise rotation
-CCW = 0                          # Counter-clockwise rotation
-STEPS_PER_REVOLUTION = 800       # Steps per Revolution (360/1.8) * 4. Multiply by 4 because quarter step.
+STEPS_PER_REVOLUTION = {'whole': 200, 'half': 400, 'quarter': 800,'eighth': 1600}
 
 DISTANCE = 60*math.pi/25.4
 
 # individual steps per inch based off of whole step, 1/2 step, 1/4 step, and 1/8 step.
-STEPS_PER_INCH = STEPS_PER_REVOLUTION/DISTANCE
-HALF_STEPS_PER_INCH = HALF_STEPS_PER_REVOLUTION/DISTANCE
-QUARTER_STEPS_PER_INCH = QUARTER_STEPS_PER_REVOLUTION/DISTANCE
-EIGTH_STEPS_PER_INCH = EIGTH_STEPS_PER_REVOLUTION/DISTANCE
 
-STEPPER_DELAY = 0.0005
-STEPS_PER_INCH_STRAFE = STEPS_PER_REVOLUTION/(DISTANCE*0.9)  # Calibrates steps_per_inch for strafe motion.
+STEPS_PER_INCH = {'whole'  : STEPS_PER_REVOLUTION['whole']    / DISTANCE,
+                  'half'   : STEPS_PER_REVOLUTION['half' ]    / DISTANCE,
+                  'quarter': STEPS_PER_REVOLUTION['quarter']  / DISTANCE,
+                  'eighth' : STEPS_PER_REVOLUTION['eighth' ]  / DISTANCE }
+
+#STEPS_PER_INCH_STRAFE = STEPS_PER_REVOLUTION/(DISTANCE*0.9)  # Calibrates steps_per_inch for strafe motion.
+
+STEPS_PER_INCH_STRAFE = {'whole'  : STEPS_PER_REVOLUTION['whole']   / (DISTANCE*0.9)
+                         'half'   : STEPS_PER_REVOLUTION['half' ]   / (DISTANCE*0.9)
+                         'quarter': STEPS_PER_REVOLUTION['quarter'] / (DISTANCE*0.9)
+                         'eighth' : STEPS_PER_REVOLUTION['eighth' ] / (DISTANCE*0.9) }
