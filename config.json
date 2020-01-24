@@ -1,0 +1,29 @@
+{
+  "motors": "DC",
+  "dc_config":{
+    "motor_pins":{
+      "DC_FL": [9, 11],
+      "DC_FR": [22, 27],
+      "DC_BL": [6, 13],
+      "DC_BR": [21, 20]
+    },
+    "rotary_pins":{
+      "DC_rotary_A": 23,
+      "DC_rotary_B": 24
+    },
+    "encoder_pins":{
+      "DC_encoder_1": 17,
+      "DC_encoder_2": 10,
+      "DC_encoder_3": 5,
+      "DC_encoder_4": 16
+    }
+  },
+  "stepper_config":{
+    "motor_pins":{
+      "DC_FL": "config",
+      "DC_FR": "config",
+      "DC_BL": "config",
+      "DC_BR": "config"
+    }
+  }
+}

@@ -1,34 +1,27 @@
-from argparse import ArgumentParser
+import sys
+import json
 import RPi.GPIO as GPIO
-from motion import*
-from motion import StepperMotion
-from stepper_constants import STEP_MODE_SELECT
+from nav.dc.dc_motion import DC_Motion
 
 def main():
-    parser = ArgumentParser(description='Select modes on the robot')
-    parser.add_argument("-m", "--motor_select", dest="motor_select", default="stepper", help="Stepper or DC")
-    parser.add_argument("-d", "--stepper_delay", dest="stepper_delay", type=float, default=0.005, help="Delay for stepper motors")
-    parser.add_argument("-f", "--fwd_dist", dest="dist", type=int, default=5, help="Distance to move forward")
-
-    args = parser.parse_args()
-    motor_select = args.motor_select
-    stepper_delay = args.stepper_delay
-    fwd_dist = args.dist
-
     # Refering to pins by the "Broadcom SOC channel".
     GPIO.setmode(GPIO.BCM)
 
-    # Initialize stepper motion object
-    step_motion = StepperMotion(GPIO)
-    
-    # Initiallize motor controller board. Set step to quater step
-    [GPIO.output(pin, GPIO.HIGH) for pin in STEP_MODE_SELECT]
-    
-    sleep(1)
+    with open('config.json') as data:
+        config = json.load(data)
 
-    # TODO: Example call
-    step_motion.strafe(LEFT, 15, GPIO)
-    
+    motors_select = config['motors']
+
+    if motors_select == "DC":
+        motion = DC_Motion(config["dc_config"], GPIO)
+    elif motors_select == "stepper":
+        pass
+    else:
+        raise ValueError("Motors not selected in config.json")
+        sys.exit()
+
+    motion.mov(True, 5, GPIO)
+
     GPIO.cleanup()
 
 if __name__ == "__main__":
