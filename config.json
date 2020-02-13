@@ -4,8 +4,8 @@
     "motor_pins":{
       "DC_FL": [9, 11],
       "DC_FR": [22, 27],
-      "DC_BL": [6, 13],
-      "DC_BR": [21, 20]
+      "DC_BL": [13, 6],
+      "DC_BR": [20, 21]
     },
     "rotary_pins":{
       "DC_rotary_A": 23,

@@ -1,3 +1,4 @@
+import time
 import sys
 import json
 import RPi.GPIO as GPIO
@@ -20,9 +21,28 @@ def main():
         raise ValueError("Motors not selected in config.json")
         sys.exit()
 
-    motion.mov(True, 5, GPIO)
-
-    GPIO.cleanup()
+    motion.mov(True, 12, GPIO)
+    
+    time.sleep(1)
+    
+    motion.mov(False, 12, GPIO)
+    
+    time.sleep(1)
+    
+    motion.turn(True, 1, GPIO)
+    
+    time.sleep(1)
+    
+    motion.turn(False, 1, GPIO)
+    
+    time.sleep(1)
+    
+    motion.strafe(True, 1, GPIO)
+    
+    time.sleep(1)
+    
+    motion.strafe(False, 1, GPIO)
+    #GPIO.cleanup()
 
 if __name__ == "__main__":
     main()

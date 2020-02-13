@@ -74,7 +74,7 @@ class DC_Motion:
         self.global_counter = 0
 
     # TODO: Calculate degrees turned using magnetometer
-    def turn(self, dir: bool, degrees: int, GPIO):
+    def strafe(self, dir: bool, degrees: int, GPIO):
         if dir:
             turn_wheels = [self.wheels["DC_FR"][1], self.wheels["DC_FL"][0], self.wheels["DC_BL"][0], self.wheels["DC_BR"][1]]
             non_turn_wheels = [self.wheels["DC_FR"][0], self.wheels["DC_FL"][1], self.wheels["DC_BL"][1], self.wheels["DC_BR"][0]]
@@ -85,14 +85,13 @@ class DC_Motion:
         for a, b in zip(turn_wheels, non_turn_wheels):
             GPIO.output(a, True)
             GPIO.output(b, False)
-
-        # Replace this with magnetometer code
+            
         time.sleep(1)
 
         clear_wheels(self.wheels, GPIO)
 
     # TODO: Calculate distance strafed using onboard sensors
-    def strafe(self, dir:bool, distance: int, GPIO):
+    def turn(self, dir:bool, distance: int, GPIO):
         if dir:
             turn_wheels = [self.wheels["DC_FR"][1], self.wheels["DC_FL"][0], self.wheels["DC_BL"][1], self.wheels["DC_BR"][0]]
             non_turn_wheels = [self.wheels["DC_FR"][0], self.wheels["DC_FL"][1], self.wheels["DC_BL"][0], self.wheels["DC_BR"][1]]
