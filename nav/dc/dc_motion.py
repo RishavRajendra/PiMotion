@@ -1,6 +1,7 @@
 import time
 from .misc import *
 from .dc_constants import *
+from CMPS12 import readAngle
 import math
 
 class DC_Motion:
@@ -74,7 +75,7 @@ class DC_Motion:
         self.global_counter = 0
 
     # TODO: Calculate degrees turned using magnetometer
-    def strafe(self, dir: bool, degrees: int, GPIO):
+    def strafe(self, dir: bool, distance: int, GPIO):
         if dir:
             turn_wheels = [self.wheels["DC_FR"][1], self.wheels["DC_FL"][0], self.wheels["DC_BL"][0], self.wheels["DC_BR"][1]]
             non_turn_wheels = [self.wheels["DC_FR"][0], self.wheels["DC_FL"][1], self.wheels["DC_BL"][1], self.wheels["DC_BR"][0]]
@@ -91,19 +92,32 @@ class DC_Motion:
         clear_wheels(self.wheels, GPIO)
 
     # TODO: Calculate distance strafed using onboard sensors
-    def turn(self, dir:bool, distance: int, GPIO):
+    def turn(self, dir:bool, degrees: int, GPIO):
+        current_deg = readAngle()
+
+        #The degree calulation will probably need to change
+        #Pending what direction dir actually turns
         if dir:
+            target_deg = current_deg - degrees 
             turn_wheels = [self.wheels["DC_FR"][1], self.wheels["DC_FL"][0], self.wheels["DC_BL"][1], self.wheels["DC_BR"][0]]
             non_turn_wheels = [self.wheels["DC_FR"][0], self.wheels["DC_FL"][1], self.wheels["DC_BL"][0], self.wheels["DC_BR"][1]]
         else:
+            target_deg = current_deg + degrees
             turn_wheels = [self.wheels["DC_FR"][0], self.wheels["DC_FL"][1], self.wheels["DC_BL"][0], self.wheels["DC_BR"][1]]
             non_turn_wheels = [self.wheels["DC_FR"][1], self.wheels["DC_FL"][0], self.wheels["DC_BL"][1], self.wheels["DC_BR"][0]]
+
+        # Make sure target degree is in range of 0 to 360
+        if target_deg > 360:
+            target_deg = target_deg - 360
+        elif target_deg < 0:
+            target_deg = target_deg + 360
 
         for a, b in zip(turn_wheels, non_turn_wheels):
             GPIO.output(a, True)
             GPIO.output(b, False)
 
         # Distance calculation and stop movement here
-        time.sleep(1)
+        while readAngle() != target_deg:
+            pass
 
         clear_wheels(self.wheels, GPIO)
