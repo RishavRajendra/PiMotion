@@ -23,25 +23,25 @@ def main():
 
     motion.mov(True, 12, GPIO)
     
-    time.sleep(1)
+    #time.sleep(1)
     
-    motion.mov(False, 12, GPIO)
+    #motion.mov(False, 12, GPIO)
     
-    time.sleep(1)
+    #time.sleep(1)
     
-    motion.turn(True, 1, GPIO)
+    #motion.turn(True, 30, GPIO)
     
-    time.sleep(1)
+    #time.sleep(1)
     
-    motion.turn(False, 1, GPIO)
+    #motion.turn(False, 1, GPIO)
     
-    time.sleep(1)
+    #time.sleep(1)
     
-    motion.strafe(True, 1, GPIO)
+    #motion.strafe(True, 1, GPIO)
     
-    time.sleep(1)
+    #time.sleep(1)
     
-    motion.strafe(False, 1, GPIO)
+    #motion.strafe(False, 1, GPIO)
     #GPIO.cleanup()
 
 if __name__ == "__main__":
