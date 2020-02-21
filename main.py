@@ -21,7 +21,7 @@ def main():
         raise ValueError("Motors not selected in config.json")
         sys.exit()
 
-    motion.mov(True, 12, GPIO)
+    #motion.mov(True, 12, GPIO)
     
     #time.sleep(1)
     
@@ -29,7 +29,7 @@ def main():
     
     #time.sleep(1)
     
-    #motion.turn(True, 30, GPIO)
+    motion.turn(True, 180, GPIO)
     
     #time.sleep(1)
     
@@ -42,7 +42,7 @@ def main():
     #time.sleep(1)
     
     #motion.strafe(False, 1, GPIO)
-    #GPIO.cleanup()
+    GPIO.cleanup()
 
 if __name__ == "__main__":
     main()

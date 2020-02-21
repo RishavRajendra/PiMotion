@@ -98,11 +98,11 @@ class DC_Motion:
         #The degree calulation will probably need to change
         #Pending what direction dir actually turns
         if dir:
-            target_deg = current_deg - degrees 
+            target_deg = current_deg + degrees 
             turn_wheels = [self.wheels["DC_FR"][1], self.wheels["DC_FL"][0], self.wheels["DC_BL"][1], self.wheels["DC_BR"][0]]
             non_turn_wheels = [self.wheels["DC_FR"][0], self.wheels["DC_FL"][1], self.wheels["DC_BL"][0], self.wheels["DC_BR"][1]]
         else:
-            target_deg = current_deg + degrees
+            target_deg = current_deg - degrees
             turn_wheels = [self.wheels["DC_FR"][0], self.wheels["DC_FL"][1], self.wheels["DC_BL"][0], self.wheels["DC_BR"][1]]
             non_turn_wheels = [self.wheels["DC_FR"][1], self.wheels["DC_FL"][0], self.wheels["DC_BL"][1], self.wheels["DC_BR"][0]]
 
@@ -115,9 +115,15 @@ class DC_Motion:
         for a, b in zip(turn_wheels, non_turn_wheels):
             GPIO.output(a, True)
             GPIO.output(b, False)
-
+        
+        target_deg = round(target_deg)
+        print("target is ", target_deg)
+        quit = 0
         # Distance calculation and stop movement here
-        while readAngle() != target_deg:
-            pass
+        while round(readAngle(),0) != target_deg and quit != 2000:
+            time.sleep(0.0001)
+            quit += 1
+        print("target is ", target_deg)
+        #readAngle()
 
         clear_wheels(self.wheels, GPIO)
