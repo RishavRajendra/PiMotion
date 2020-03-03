@@ -1,7 +1,7 @@
 import time
 from .misc import *
 from .dc_constants import *
-from CMPS12 import readAngle
+from .CMPS12 import readAngle
 import math
 
 class DC_Motion:

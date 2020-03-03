@@ -1,4 +1,4 @@
-import i2c
+from . import i2c
 import time
 
 addr = 0x60

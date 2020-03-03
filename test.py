@@ -23,9 +23,15 @@ def main():
         sys.exit()
 
     # Example for fwd ultrasonic sensor
+    print("Ultrasonic fwd")
     distance_fwd = get_distance("fwd", config, GPIO)
+    print(f"Distance fwd = {distance_fwd}")
+    print("Ultrasonic left")
     distance_left = get_distance("left", config, GPIO)
+    print(f"Distance left = {distance_left}")
+    print("Ultrasonic right")
     distance_right = get_distance("right", config, GPIO)
+    print(f"Distance right = {distance_right}")
 
 if __name__ == "__main__":
     main()

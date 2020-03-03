@@ -2,12 +2,12 @@ import time
 
 def get_distance(direction, config, GPIO):
     ultrasonic_pins = {
-        "fwd": config["fwd"],
-        "left": config["left"],
-        "right": config["right"]
+        "fwd": config["front_ultrasonic"],
+        "left": config["left_ultrasonic"],
+        "right": config["right_ultrasonic"]
     }
 
-    trig, echo = ultrasonic[direction]
+    trig, echo = ultrasonic_pins[direction]
 
     GPIO.setup(trig, GPIO.OUT)
     GPIO.setup(echo, GPIO.IN)
@@ -23,7 +23,7 @@ def get_distance(direction, config, GPIO):
         pulse_end = time.time()
 
     pulse_duration = pulse_end - pulse_start
-    distance = pulse_duration * 17150
+    distance = pulse_duration * 17150 * 0.393701
 
     distance = round(distance,2)
 
