@@ -25,5 +25,8 @@
       "DC_BL": "config",
       "DC_BR": "config"
     }
-  }
+  },
+  "front_ultrasonic": [10, 25],
+  "left_ultrasonic": [7, 8],
+  "right_ultrasonic": [26, 19]
 }
