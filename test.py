@@ -5,10 +5,6 @@ import RPi.GPIO as GPIO
 from nav.dc.dc_motion import DC_Motion
 from sensor.ultrasonic import get_distance
 
-# @todo Test forward and backward movement using ultrasonic sensors
-def _test_mov():
-    distance_sensor = get_distance()
-
 def main():
     # Refering to pins by the "Broadcom SOC channel".
     GPIO.setmode(GPIO.BCM)
@@ -26,7 +22,16 @@ def main():
         raise ValueError("Motors not selected in config.json")
         sys.exit()
 
-    _test_mov()
+    # Example for fwd ultrasonic sensor
+    print("Ultrasonic fwd")
+    distance_fwd = get_distance("fwd", config, GPIO)
+    print(f"Distance fwd = {distance_fwd}")
+    print("Ultrasonic left")
+    distance_left = get_distance("left", config, GPIO)
+    print(f"Distance left = {distance_left}")
+    print("Ultrasonic right")
+    distance_right = get_distance("right", config, GPIO)
+    print(f"Distance right = {distance_right}")
 
 if __name__ == "__main__":
     main()
