@@ -5,6 +5,11 @@ import RPi.GPIO as GPIO
 from nav.dc.dc_motion import DC_Motion
 from sensor.ultrasonic import get_distance
 
+# Test for robot to move forward
+# 5 in, 12 in, 25 in. 50 in
+def mov_fwd_test():
+    pass
+
 def main():
     # Refering to pins by the "Broadcom SOC channel".
     GPIO.setmode(GPIO.BCM)
