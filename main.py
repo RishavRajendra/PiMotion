@@ -29,7 +29,7 @@ def main():
     
     #time.sleep(1)
     
-    motion.turn(True, 180, GPIO)
+    #motion.turn(True, 180, GPIO)
     
     #time.sleep(1)
     
