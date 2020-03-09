@@ -7,13 +7,23 @@ from sensor.ultrasonic import get_distance
 
 # Test for robot to move forward
 # 5 in, 12 in, 25 in. 50 in
-def mov_fwd_test(x):
-    distance_first = get_distance("fwd", config, GPIO)
-    motion.mov(True, x, GPIO)
-    distance_second = get_distance("fwd", config, GPIO)
-    distance_moved_sensor = distance_second - distance_first
-    error_margin = x - distance_moved_sensor
-    print(f"[TEST] Move fwd -> Distance: {x}, Sensor: {distance_moved_sensor}, Error: {error_margin}" )
+#if percentage error is +ve, the actual move lags behind the asked mov, if -ve gains more distance than asked
+def mov_fwd_test(*args):
+    for x in args:
+        distance_first = get_distance("fwd", config, GPIO)
+        if x <= distance_first:
+            motion.mov(True, x, GPIO)
+            distance_second = get_distance("fwd", config, GPIO)
+            distance_moved_sensor = distance_first - distance_second
+            error_percentage = ((x - distance_moved_sensor)/x)*100
+            print(f"[TEST] Move fwd -> DistanceForward: {x}, Sensor: {distance_moved_sensor}, ErrorPercentage: {error_percentage}" )
+        '''else:
+            motion.mov(False, x, GPIO)
+            distance_second = get_distance("fwd", config, GPIO)
+            distance_moved_sensor = distance_second - distance_first
+            error_percentage = ((x - distance_moved_sensor)/x)*100
+            print(f"[TEST] Move fwd -> DistanceBackward: {x}, Sensor: {distance_moved_sensor}, ErrorPercentage: {error_percentage}" ) 
+        ''' 
 
 def main():
     # Refering to pins by the "Broadcom SOC channel".
@@ -32,7 +42,7 @@ def main():
         raise ValueError("Motors not selected in config.json")
         sys.exit()
 
-    mov_fwd_test(12)
+    mov_fwd_test(4,10, 7, 12)
 
     # Example for fwd ultrasonic sensor
     """
